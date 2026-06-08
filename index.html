@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
-    <title>Bandwidth Data</title>
+    <title>Yoshi's Bandwidth Data</title>
     <link rel="stylesheet" type="text/css" href="style/data.css"/>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript" src="scripts/bwgraphing.js"></script>
@@ -12,8 +12,7 @@
 <div id='exportContainer'></div>
 <h1>Bandwidth Data Graphing and Reference</h1>
 <div>
-    Credits to <a href="https://jsmemtest.chipsandcheese.com/bwdata" target="_blank">https://jsmemtest.chipsandcheese.com/bwdata</a> for the original code. Google Charts used for graphing. Only read bandwidth
-    is covered for now. All data is collected by <a href='https://github.com/pt13762104' target="_blank">me</a>.
+    Credits to <a href="https://jsmemtest.chipsandcheese.com/bwdata" target="_blank">https://jsmemtest.chipsandcheese.com/bwdata</a> for the original code. Google Charts used for graphing. All data is collected by <a href='https://github.com/pt13762104' target="_blank">me</a>.
 </div>
 <div>
     Notes about data:
@@ -24,7 +23,7 @@
         <li>CPU tests use SSE, AVX, AVX512, or NEON/ASIMD assembly, whichever is supported.</li>
         <li>For multithreaded bandwidth, CPUs were tested in two modes. Shared means one array is read by all threads, while private means each thread is given its own private array. Shared mode tends to overestimate main memory bandwidth, possibly because the memory controller is broadcasting reads from the same location to multiple cores. 
         So, use private mode to estimate memory bandwidth. Cache bandwidth appears to be accurate in both modes.</li>
-        <li>Instruction bandwidth is measured using 8-byte NOPs, specifically <code>0F 1F 84 00 00 00 00 00</code>, unless otherwise specified. On ARM and IBM power, the respective fixed-length NOP encodings are used.</li>
+        <li>Instruction bandwidth is measured using 8-byte NOPs, specifically <code>0F 1F 84 00 00 00 00 00</code>, unless otherwise specified. On ARM, the respective fixed-length NOP encodings are used.</li>
         <li>Test points might not be matched between different tests. Where there's a gap, the average of the two nearest data points is shown.</li> 
     </ul>
 </div>
