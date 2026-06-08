@@ -1,0 +1,97 @@
+body {
+    max-width: 1280px;
+    margin: auto;
+    padding: 0 1em;
+}
+
+body * {
+    box-sizing: border-box;
+}
+
+#select-and-chart {
+    display: flex;
+    width: 100%
+}
+
+@media (max-width: 840px) {
+    body {
+        font-size: 16px;
+    }
+
+    #select-and-chart {
+        flex-direction: column-reverse;
+    }
+
+    #selectors {
+        margin: auto;
+    }
+}
+
+#selectors {
+    display: flex;
+    flex-direction: column;
+    padding-right: 1em;
+    width: 450px;
+    max-width: 100%;
+    padding-top: 1em;
+}
+
+.selector {
+    border: 1px solid #ccc;
+    border-radius: .5em;
+    padding: .5em 1em;
+    margin-bottom: 1em;
+    min-width: 150px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, .2);
+}
+
+.selector[open] > summary {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: .25em;
+    margin-bottom: .25em;
+}
+
+#chartContainer {
+    width: 100%;
+    margin-bottom: .5em;
+    overflow: hidden;
+}
+
+#chart > div {
+    width: 100%;
+    border: #ccc solid 1px;
+}
+
+#exportContainer {
+    display: none;
+    width: 50%;
+    position: fixed;
+    top: 20px;
+    left: 20%;
+    padding: 4px;
+    background-color: white;
+    border: 1px solid black;
+    z-index: 100;
+    font-family: monospace;
+}
+
+.fixedchart {
+    opacity: 0.5;
+}
+
+.selectData, .selectedData {
+    cursor: pointer;
+    user-select: none;
+}
+
+.selectData {
+    color: rgb(200, 200, 200);
+}
+
+.selectedData {
+    color: rgb(0, 0, 100);
+}
+
+#resultComment {
+    margin-top: 1em;
+}

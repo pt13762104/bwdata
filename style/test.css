@@ -1,0 +1,109 @@
+body {
+    max-width: 960px;
+    margin: auto;
+    padding: 1rem;
+    color: #222;
+}
+
+body * {
+    box-sizing: border-box;
+}
+
+main {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 0;
+    justify-content: left;
+}
+
+main > * {
+    margin-bottom: 1em;
+    flex: 0;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 0.25em;
+}
+
+details {
+    display: flex;
+    flex-direction: column;
+    border: #ddd solid 1px;
+    border-radius: .5em;
+    padding: .25em .75em;
+}
+
+details > * {
+    margin: .5em 0;
+}
+
+details[open] > summary {
+    padding-bottom: .5em;
+    border-bottom: #ddd solid 1px;
+}
+
+details label {
+    font-size: .9rem
+}
+
+details input[type="text"] {
+    max-width: 100px;
+    border: #aaa solid 1px;
+    border-radius: .25em;
+}
+
+#runTheThing {
+    margin-right: auto;
+    font-size: 16px;
+}
+
+#status-and-results {
+    display: flex;
+    flex-direction: column;
+    border-top: #bbb 1px solid;
+    padding-top: 1.5em;
+}
+
+#results {
+    display: flex;
+}
+
+#results > * {
+    width: 100%;
+}
+
+#statusMessage {
+    margin-right: auto;
+    margin-bottom: 2em;
+}
+
+#graph {
+    margin-left: 1em;
+    position: relative;
+    border: 1px solid #bbb;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, .16);
+    background-color: white;
+    padding: 0;
+}
+
+#statusMessage, #rawresult {
+    display: flex;
+    font-family: monospace;
+    background-color: #eeeeee;
+    border-radius: .75em;
+    border: #bbb solid 1px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, .16);
+    padding: 0.75em;
+}
+
+@media (max-width: 640px) {
+    #results {
+        flex-direction: column-reverse;
+    }
+
+    #results > * {
+        margin: .5em 0;
+    }
+}

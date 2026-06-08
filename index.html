@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>Bandwidth Data</title>
+    <link rel="stylesheet" type="text/css" href="style/data.css"/>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="scripts/bwgraphing.js"></script>
+</head>
+<body>
+<div id='exportContainer'></div>
+<h1>Bandwidth Data Graphing and Reference</h1>
+<div>
+    Data compiled by Clamchowder from various sources. Google Charts used for graphing. Only read bandwidth
+    is covered for now.
+</div>
+<div>
+    Notes about data:
+    <ul>
+        <li>GPU data was collected using <a href='https://twitter.com/GPUsAreMagic' target="_blank">Nemes</a>'s Vulkan test.
+        For GPUs that can't use Vulkan, results are either from a deprecated OpenCL version of her test, or an OpenCL test written by Clamchowder. Vulkan figures should be considerd the most polished and accurate, as the <a href="https://github.com/clamchowder/Microbenchmarks/tree/master/GpuMemLatency">Clamchowder OpenCL tests</a> are still a work in progress, especially the bandwidth stuff. Benchmarking GPUs is hard.
+        </li>
+        <li>CPU tests use SSE, AVX, AVX512, or NEON/ASIMD assembly, whichever is supported.</li>
+        <li>For multithreaded bandwidth, CPUs were tested in two modes. Shared means one array is read by all threads, while private means each thread is given its own private array. Shared mode tends to overestimate main memory bandwidth, possibly because the memory controller is broadcasting reads from the same location to multiple cores. 
+        So, use private mode to estimate memory bandwidth. Cache bandwidth appears to be accurate in both modes.</li>
+        <li>Instruction bandwidth is measured using 8-byte NOPs, specifically <code>0F 1F 84 00 00 00 00 00</code>, unless otherwise specified. On ARM and IBM power, the respective fixed-length NOP encodings are used.</li>
+        <li>Test points might not be matched between different tests. Where there's a gap, the average of the two nearest data points is shown.</li> 
+    </ul>
+</div>
+<div>
+Use logarithmic scale for bandwidth: <input type="checkbox" name="logCheckbox" id="logCheckbox" onclick="redraw();" />
+</div>
+<div>Filter: <input type='text' id='filtertext' onkeyup="updateFilter();" /></div>
+<div id="select-and-chart">
+    <div id="selectors">
+        <details id="cpuStDataContainer" class="selector">
+            <summary>CPUs, Single Thread Read</summary>
+        </details>
+        <details id="cpuPrivateDataContainer" class="selector">
+            <summary>CPU Read BW, MT with Thread-Private Data</summary>
+        </details>  
+        <details id="cpuInstrFetchContainer" class="selector">
+            <summary>CPUs, ST Instruction Fetch BW</summary>
+        </details>   
+        <details id="vulkanDataContainer" class="selector">
+            <summary>GPUs (Vulkan)</summary>
+        </details>
+        <details id="openclDataContainer" class="selector">
+            <summary>GPUs (OpenCL)</summary>
+        </details> 
+        <details id="cpuSharedDataContainer" class="selector">
+            <summary>CPUs, MT with Shared Data</summary>
+        </details>  
+        <details id="cpuWriteStDataContainer" class="selector">
+            <summary>CPU Write BW, Single Thread</summary>
+        </details>     
+        <details id="cpuWritePrivateDataContainer" class="selector">
+            <summary>CPU Write BW, MT Thread-Private Data</summary>
+        </details>    
+        <details id="testDataContainer" class="selector">
+            <summary>Temporary Testing Data</summary>
+        </details>     
+        <details id="otherDataContainer" class="selector">
+            <summary>Other</summary>
+        </details>
+    </div>
+
+    <div id="chartContainer">
+        <div id="chart" class="chart"></div>
+        <div id="resultComment"></div>
+    </div>
+</div>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"3a8c1f2e25f4436bb66e69455e96e3c8","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a07d2ddddbfa87d1',t:'MTc4MDgwOTMyOA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
